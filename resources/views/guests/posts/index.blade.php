@@ -7,7 +7,16 @@
         @if ($posts->isEmpty())
             <p>Nessun post creato</p>
         @else
-            lista posts
+            @foreach ($posts as $post)
+                <article class="mb-5">
+                    <h2>{{ $post->title }}</h2>
+                    <div class="info">
+                        By {{ $post->user->name }}
+                        <div class="date">{{ $post->updated_at->diffForHumans() }}</div>
+                    </div>
+                    <a href="{{ route('posts.show', $post->slug) }}">Read more</a>
+                </article>
+            @endforeach
         @endif
     </div>
 @endsection
